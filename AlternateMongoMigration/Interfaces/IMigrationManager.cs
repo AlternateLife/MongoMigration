@@ -10,9 +10,9 @@ namespace AlternateMongoMigration.Interfaces
 
         string MigrationDatabaseCollection { get; set; }
 
-        void AddClientForDatabase(MongoClient client, string databaseName);
+        void AddDatabase(IMongoDatabase database, string databaseName);
 
-        MongoClient GetClientForDatabase(string databaseName);
+        IMongoDatabase GetDatabase(string databaseName);
 
         void LoadMigrations();
 

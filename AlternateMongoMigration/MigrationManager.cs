@@ -11,8 +11,7 @@ namespace AlternateMongoMigration
     public class MigrationManager : IMigrationManager
     {
         private readonly List<IMigration> _migrations;
-        // TODO: Replace clients with databases
-        private readonly Dictionary<string, MongoClient> _clients;
+        private readonly Dictionary<string, IMongoDatabase> _databases;
 
         private string _migrationDatabaseName = "general";
         private string _migrationDatabaseCollection = "migration";
@@ -43,14 +42,14 @@ namespace AlternateMongoMigration
         public MigrationManager()
         {
             _migrations = new List<IMigration>();
-            _clients = new Dictionary<string, MongoClient>();
+            _databases = new Dictionary<string, IMongoDatabase>();
         }
 
-        public void AddClientForDatabase(MongoClient client, string databaseName)
+        public void AddDatabase(IMongoDatabase database, string databaseName)
         {
-            if (client == null)
+            if (database == null)
             {
-                throw new ArgumentNullException(nameof(client));
+                throw new ArgumentNullException(nameof(database));
             }
 
             if (string.IsNullOrEmpty(databaseName))
@@ -58,17 +57,17 @@ namespace AlternateMongoMigration
                 throw new ArgumentNullException(nameof(databaseName));
             }
 
-            _clients[databaseName] = client;
+            _databases[databaseName] = database;
         }
 
-        public MongoClient GetClientForDatabase(string databaseName)
+        public IMongoDatabase GetDatabase(string databaseName)
         {
             if (string.IsNullOrEmpty(databaseName))
             {
                 throw new ArgumentNullException(nameof(databaseName));
             }
 
-            return _clients.ContainsKey(databaseName) ? _clients[databaseName] : null;
+            return _databases.ContainsKey(databaseName) ? _databases[databaseName] : null;
         }
 
         public void LoadMigrations()
@@ -126,13 +125,12 @@ namespace AlternateMongoMigration
                 return _migrationCollection;
             }
 
-            if (_clients.ContainsKey(MigrationDatabaseName) == false)
+            if (_databases.ContainsKey(MigrationDatabaseName) == false)
             {
                 throw new MissingFieldException("Migration database client is missing");
             }
 
-            var client = _clients[MigrationDatabaseName];
-            var database = client.GetDatabase(MigrationDatabaseName);
+            var database = _databases[MigrationDatabaseName]
 
             _migrationCollection = database.GetCollection<MigrationModel>(MigrationDatabaseCollection);
 
