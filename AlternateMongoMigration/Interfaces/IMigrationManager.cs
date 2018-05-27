@@ -10,6 +10,8 @@ namespace AlternateMongoMigration.Interfaces
 
         string MigrationDatabaseCollection { get; set; }
 
+        int Batch { get; }
+
         void AddDatabase(IMongoDatabase database, string databaseName);
 
         IMongoDatabase GetDatabase(string databaseName);

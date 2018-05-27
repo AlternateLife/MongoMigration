@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using AlternateMongoMigration.DatabaseModels;
 using AlternateMongoMigration.Interfaces;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace AlternateMongoMigration
@@ -38,6 +39,8 @@ namespace AlternateMongoMigration
                 _migrationCollection = null;
             }
         }
+
+        public int Batch { get; private set; }
 
         public MigrationManager()
         {
@@ -101,7 +104,8 @@ namespace AlternateMongoMigration
             {
                 migration.Up();
 
-                // TODO: add document to migration collection
+                // add migration entry
+                GetMigrationCollection().InsertOne(new MigrationModel(migration.Name, Batch));
 
                 appliedMigrations.Add(migration);
             }
@@ -149,6 +153,17 @@ namespace AlternateMongoMigration
             var database = _databases[MigrationDatabaseName];
 
             _migrationCollection = database.GetCollection<MigrationModel>(MigrationDatabaseCollection);
+
+            // update batch number
+            var latestMigration = _migrationCollection.Find(m => true).SortByDescending(m => m.Batch).FirstOrDefault();
+            if (latestMigration != null)
+            {
+                Batch = latestMigration.Batch + 1;
+            }
+            else
+            {
+                Batch = 0;
+            }
 
             return _migrationCollection;
         }
