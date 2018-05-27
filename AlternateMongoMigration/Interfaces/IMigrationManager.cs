@@ -6,6 +6,10 @@ namespace AlternateMongoMigration.Interfaces
 {
     public interface IMigrationManager
     {
+        string MigrationDatabaseName { get; set; }
+
+        string MigrationDatabaseCollection { get; set; }
+
         void AddClientForDatabase(MongoClient client, string databaseName);
 
         MongoClient GetClientForDatabase(string databaseName);

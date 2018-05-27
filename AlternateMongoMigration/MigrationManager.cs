@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AlternateMongoMigration.Interfaces;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace AlternateMongoMigration
@@ -10,7 +11,34 @@ namespace AlternateMongoMigration
     public class MigrationManager : IMigrationManager
     {
         private readonly List<IMigration> _migrations;
+        // TODO: Replace clients with databases
         private readonly Dictionary<string, MongoClient> _clients;
+
+        private string _migrationDatabaseName = "general";
+        private string _migrationDatabaseCollection = "migration";
+        private IMongoCollection<BsonDocument> _migrationCollection = null;
+
+        public string MigrationDatabaseName
+        {
+            get => _migrationDatabaseName;
+            set
+            {
+                _migrationDatabaseName = value;
+
+                _migrationCollection = null;
+            }
+        }
+
+        public string MigrationDatabaseCollection
+        {
+            get => _migrationDatabaseCollection;
+            set
+            {
+                _migrationDatabaseCollection = value;
+
+                _migrationCollection = null;
+            }
+        }
 
         public MigrationManager()
         {
@@ -60,7 +88,7 @@ namespace AlternateMongoMigration
 
             foreach (var typeInfo in migrationTypes)
             {
-                var migration = (IMigration) Activator.CreateInstance(typeInfo.AsType());
+                var migration = (IMigration) Activator.CreateInstance(typeInfo.AsType(), this);
 
                 _migrations.Add(migration);
             }
@@ -73,22 +101,42 @@ namespace AlternateMongoMigration
 
         public IEnumerable<IMigration> GetUnappliedMigrations()
         {
-            throw new NotImplementedException();
+            return _migrations.Where(m => IsMigrationApplied(m) == false);
         }
 
         public IEnumerable<IMigration> GetAppliedMigrations()
         {
-            throw new NotImplementedException();
+            return _migrations.Where(IsMigrationApplied);
         }
 
         public bool IsMigrationApplied(string name)
         {
-            throw new NotImplementedException();
+            return GetMigrationCollection().Count(m => m["migration"] == name) > 0;
         }
 
         public bool IsMigrationApplied(IMigration migration)
         {
             return IsMigrationApplied(migration.GetType().Name);
+        }
+
+        private IMongoCollection<BsonDocument> GetMigrationCollection()
+        {
+            if (_migrationCollection != null)
+            {
+                return _migrationCollection;
+            }
+
+            if (_clients.ContainsKey(MigrationDatabaseName) == false)
+            {
+                throw new MissingFieldException("Migration database client is missing");
+            }
+
+            var client = _clients[MigrationDatabaseName];
+            var database = client.GetDatabase(MigrationDatabaseName);
+
+            _migrationCollection = database.GetCollection<BsonDocument>(MigrationDatabaseCollection);
+
+            return _migrationCollection;
         }
     }
 }
