@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using System;
+using MongoDB.Driver;
 using Moq;
 using NUnit.Framework;
 
@@ -8,7 +9,7 @@ namespace AlternateMongoMigration.Tests
     public class MigrationManagerFixture
     {
         [Test]
-        public void DefaultProperties()
+        public void VerifyDefaultProperties()
         {
             var migrationManager = new MigrationManager();
 
@@ -18,16 +19,42 @@ namespace AlternateMongoMigration.Tests
         }
 
         [Test]
-        public void ConnectWithDefaultConfigurations()
+        public void AddDatabases()
         {
             var migrationManager = new MigrationManager();
 
-            // add general database
-            var generalDatabase = new Mock<IMongoDatabase>();
+            var databaseMock = new Mock<IMongoDatabase>();
 
-            migrationManager.AddDatabase(generalDatabase.Object, "general");
+            Assert.Throws<ArgumentNullException>(() => migrationManager.AddDatabase(null, "general"));
+            Assert.Throws<ArgumentNullException>(() => migrationManager.AddDatabase(databaseMock.Object, null));
+            Assert.Throws<ArgumentNullException>(() => migrationManager.AddDatabase(databaseMock.Object, ""));
 
-            Assert.AreEqual(migrationManager.GetDatabase("general"), generalDatabase.Object);
+            Assert.DoesNotThrow(() => migrationManager.AddDatabase(databaseMock.Object, "general"));
+        }
+
+        [Test]
+        public void GetDatabases()
+        {
+            var migrationManager = new MigrationManager();
+
+            Assert.Throws<ArgumentNullException>(() => migrationManager.GetDatabase(null));
+            Assert.Throws<ArgumentNullException>(() => migrationManager.GetDatabase(""));
+
+            Assert.AreEqual(migrationManager.GetDatabase("unknown"), null);
+
+            // add valid database
+            var databaseMock = new Mock<IMongoDatabase>();
+            migrationManager.AddDatabase(databaseMock.Object, "general");
+
+            Assert.AreEqual(migrationManager.GetDatabase("general"), databaseMock.Object);
+        }
+
+        [Test]
+        public void ExceptionWhenGettingUnknownDatabase()
+        {
+            var migrationManager = new MigrationManager();
+
+            Assert.Throws<MissingFieldException>(() => migrationManager.GetDatabase("general"));
         }
     }
 }
