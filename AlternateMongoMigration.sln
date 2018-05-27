@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlternateMongoMigration", "AlternateMongoMigration\AlternateMongoMigration.csproj", "{E6C46B58-6A3F-4004-B627-442D35039541}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlternateMongoMigration.Tests", "AlternateMongoMigration.Tests\AlternateMongoMigration.Tests.csproj", "{9E1D3071-F1A7-4635-8792-80B4843AB9C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{E6C46B58-6A3F-4004-B627-442D35039541}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6C46B58-6A3F-4004-B627-442D35039541}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6C46B58-6A3F-4004-B627-442D35039541}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E1D3071-F1A7-4635-8792-80B4843AB9C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E1D3071-F1A7-4635-8792-80B4843AB9C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E1D3071-F1A7-4635-8792-80B4843AB9C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E1D3071-F1A7-4635-8792-80B4843AB9C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
