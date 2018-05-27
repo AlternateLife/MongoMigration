@@ -6,7 +6,7 @@ namespace AlternateMongoMigration
     {
         public string Name => GetType().Name;
 
-        private readonly MigrationManager _migrationManager;
+        protected readonly MigrationManager _migrationManager;
 
         protected MigrationBase(MigrationManager migrationManager)
         {

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using AlternateMongoMigration.DatabaseModels;
 using AlternateMongoMigration.Interfaces;
-using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace AlternateMongoMigration
@@ -16,7 +16,7 @@ namespace AlternateMongoMigration
 
         private string _migrationDatabaseName = "general";
         private string _migrationDatabaseCollection = "migration";
-        private IMongoCollection<BsonDocument> _migrationCollection = null;
+        private IMongoCollection<MigrationModel> _migrationCollection;
 
         public string MigrationDatabaseName
         {
@@ -111,7 +111,7 @@ namespace AlternateMongoMigration
 
         public bool IsMigrationApplied(string name)
         {
-            return GetMigrationCollection().Count(m => m["migration"] == name) > 0;
+            return GetMigrationCollection().Count(m => m.Migration == name) > 0;
         }
 
         public bool IsMigrationApplied(IMigration migration)
@@ -119,7 +119,7 @@ namespace AlternateMongoMigration
             return IsMigrationApplied(migration.GetType().Name);
         }
 
-        private IMongoCollection<BsonDocument> GetMigrationCollection()
+        private IMongoCollection<MigrationModel> GetMigrationCollection()
         {
             if (_migrationCollection != null)
             {
@@ -134,7 +134,7 @@ namespace AlternateMongoMigration
             var client = _clients[MigrationDatabaseName];
             var database = client.GetDatabase(MigrationDatabaseName);
 
-            _migrationCollection = database.GetCollection<BsonDocument>(MigrationDatabaseCollection);
+            _migrationCollection = database.GetCollection<MigrationModel>(MigrationDatabaseCollection);
 
             return _migrationCollection;
         }
