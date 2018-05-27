@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AlternateMongoMigration.DatabaseModels;
+using AlternateMongoMigration.Exceptions;
 using AlternateMongoMigration.Interfaces;
-using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace AlternateMongoMigration
@@ -102,7 +102,14 @@ namespace AlternateMongoMigration
 
             foreach (var migration in GetUnappliedMigrations())
             {
-                migration.Up();
+                try
+                {
+                    migration.Up();
+                }
+                catch (Exception innerException)
+                {
+                    throw new MigrationErrorException(migration.Name, appliedMigrations, innerException);
+                }
 
                 // add migration entry
                 GetMigrationCollection().InsertOne(new MigrationModel(migration.Name, Batch));
