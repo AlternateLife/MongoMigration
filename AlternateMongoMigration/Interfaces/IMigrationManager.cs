@@ -18,6 +18,8 @@ namespace AlternateMongoMigration.Interfaces
 
         void LoadMigration(IEnumerable<Assembly> assemblies);
 
+        IEnumerable<IMigration> ApplyMigrations();
+
         IEnumerable<IMigration> GetMigrations();
 
         IEnumerable<IMigration> GetUnappliedMigrations();

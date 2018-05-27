@@ -93,6 +93,22 @@ namespace AlternateMongoMigration
             }
         }
 
+        public IEnumerable<IMigration> ApplyMigrations()
+        {
+            var appliedMigrations = new List<IMigration>();
+
+            foreach (var migration in GetUnappliedMigrations())
+            {
+                migration.Up();
+
+                // TODO: add document to migration collection
+
+                appliedMigrations.Add(migration);
+            }
+
+            return appliedMigrations;
+        }
+
         public IEnumerable<IMigration> GetMigrations()
         {
             return _migrations;
@@ -130,7 +146,7 @@ namespace AlternateMongoMigration
                 throw new MissingFieldException("Migration database client is missing");
             }
 
-            var database = _databases[MigrationDatabaseName]
+            var database = _databases[MigrationDatabaseName];
 
             _migrationCollection = database.GetCollection<MigrationModel>(MigrationDatabaseCollection);
 
