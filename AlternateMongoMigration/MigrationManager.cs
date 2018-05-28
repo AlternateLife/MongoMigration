@@ -75,17 +75,17 @@ namespace AlternateMongoMigration
 
         public void LoadMigrations()
         {
-            LoadMigration(AppDomain.CurrentDomain.GetAssemblies());
+            LoadMigrations(AppDomain.CurrentDomain.GetAssemblies());
         }
 
-        public void LoadMigration(IEnumerable<Assembly> assemblies)
+        public void LoadMigrations(IEnumerable<Assembly> assemblies)
         {
             // get all migration type infos
             var migrationTypes = new List<TypeInfo>();
 
             foreach (var assembly in assemblies)
             {
-                migrationTypes.AddRange(assembly.DefinedTypes.Where(t => t.ImplementedInterfaces.Contains(typeof(IMigration))).OrderBy(m => m.Name));
+                migrationTypes.AddRange(assembly.DefinedTypes.Where(t => t.ImplementedInterfaces.Contains(typeof(IMigration)) && t.IsAbstract == false).OrderBy(m => m.Name));
             }
 
             foreach (var typeInfo in migrationTypes)

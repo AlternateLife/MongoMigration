@@ -18,7 +18,7 @@ namespace AlternateMongoMigration.Interfaces
 
         void LoadMigrations();
 
-        void LoadMigration(IEnumerable<Assembly> assemblies);
+        void LoadMigrations(IEnumerable<Assembly> assemblies);
 
         IEnumerable<IMigration> ApplyMigrations();
 

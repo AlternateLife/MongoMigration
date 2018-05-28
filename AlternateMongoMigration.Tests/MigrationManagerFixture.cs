@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using AlternateMongoMigration.Tests.SampleMigrations;
 using MongoDB.Driver;
 using Moq;
 using NUnit.Framework;
@@ -50,11 +52,16 @@ namespace AlternateMongoMigration.Tests
         }
 
         [Test]
-        public void ExceptionWhenGettingUnknownDatabase()
+        public void LoadMigrations()
         {
             var migrationManager = new MigrationManager();
 
-            Assert.Throws<MissingFieldException>(() => migrationManager.GetDatabase("general"));
+            Assert.AreEqual(migrationManager.GetMigrations().Count(), 0);
+
+            migrationManager.LoadMigrations();
+
+            Assert.AreEqual(migrationManager.GetMigrations().Count(), 1);
+            Assert.AreEqual(migrationManager.GetMigrations().First().GetType(), typeof(Migration_001));
         }
     }
 }

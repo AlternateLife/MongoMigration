@@ -1,4 +1,5 @@
 ﻿using AlternateMongoMigration.Interfaces;
+using MongoDB.Driver;
 
 namespace AlternateMongoMigration
 {
@@ -6,7 +7,7 @@ namespace AlternateMongoMigration
     {
         public string Name => GetType().Name;
 
-        protected readonly MigrationManager _migrationManager;
+        private readonly MigrationManager _migrationManager;
 
         protected MigrationBase(MigrationManager migrationManager)
         {
@@ -15,5 +16,10 @@ namespace AlternateMongoMigration
 
         public abstract void Up();
         public abstract void Down();
+
+        protected IMongoDatabase GetDatabase(string database)
+        {
+            return _migrationManager.GetDatabase(database);
+        }
     }
 }
