@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using AlternateMongoMigration.DatabaseModels;
+using AlternateMongoMigration.Interfaces;
 using AlternateMongoMigration.Tests.SampleMigrations;
 using MongoDB.Driver;
 using Moq;

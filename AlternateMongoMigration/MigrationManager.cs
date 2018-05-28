@@ -160,6 +160,10 @@ namespace AlternateMongoMigration
             var database = _databases[MigrationDatabaseName];
 
             _migrationCollection = database.GetCollection<MigrationModel>(MigrationDatabaseCollection);
+            if (_migrationCollection == null)
+            {
+                throw new MigrationCollectionNotFoundException();
+            }
 
             // update batch number
             var latestMigration = _migrationCollection.Find(m => true).SortByDescending(m => m.Batch).FirstOrDefault();
