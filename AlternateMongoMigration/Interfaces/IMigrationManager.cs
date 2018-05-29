@@ -29,7 +29,7 @@ namespace AlternateMongoMigration.Interfaces
         /// <param name="connectionString">MongoDB connection string to connect to the database</param>
         /// <param name="databaseName">Name of the database</param>
         /// <exception cref="ArgumentNullException">Thrown if connectionString is or databaseName is null or empty</exception>
-        void AddDatabase(string connectionString, string databaseName);
+        void AddDatabaseConnection(string connectionString, string databaseName);
 
         /// <summary>
         /// Add a database to the manager and reference it by it's name.

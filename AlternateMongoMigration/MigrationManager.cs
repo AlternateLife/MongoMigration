@@ -48,7 +48,7 @@ namespace AlternateMongoMigration
             _databases = new Dictionary<string, IMongoDatabase>();
         }
 
-        public void AddDatabase(string connectionString, string databaseName)
+        public void AddDatabaseConnection(string connectionString, string databaseName)
         {
             if (string.IsNullOrEmpty(connectionString))
             {
@@ -107,6 +107,7 @@ namespace AlternateMongoMigration
 
             foreach (var typeInfo in migrationTypes)
             {
+                // TODO: Set migration manager in method to avoid constructor in migration classes
                 var migration = (IMigration) Activator.CreateInstance(typeInfo.AsType(), this);
 
                 _migrations.Add(migration);

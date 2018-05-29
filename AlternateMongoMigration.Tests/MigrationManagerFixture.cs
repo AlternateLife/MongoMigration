@@ -30,8 +30,8 @@ namespace AlternateMongoMigration.Tests
 
             var databaseMock = new Mock<IMongoDatabase>();
 
-            Assert.Throws<ArgumentNullException>(() => migrationManager.AddDatabase((IMongoDatabase)null, "general"));
-            Assert.Throws<ArgumentNullException>(() => migrationManager.AddDatabase((string)null, "general"));
+            Assert.Throws<ArgumentNullException>(() => migrationManager.AddDatabase(null, "general"));
+            Assert.Throws<ArgumentNullException>(() => migrationManager.AddDatabaseConnection(null, "general"));
             Assert.Throws<ArgumentNullException>(() => migrationManager.AddDatabase(databaseMock.Object, null));
             Assert.Throws<ArgumentNullException>(() => migrationManager.AddDatabase(databaseMock.Object, ""));
 
