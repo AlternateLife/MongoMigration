@@ -4,16 +4,16 @@ using AlternateMongoMigration.Interfaces;
 
 namespace AlternateMongoMigration.Exceptions
 {
-    public class MigrationErrorException : Exception
+    public class MigrationErrorException : MigrationException
     {
-        public string MigrationName { get; }
         public IEnumerable<IMigration> SuccessfulMigrations { get; }
 
         public MigrationErrorException(
             string migrationName,
             IEnumerable<IMigration> successfulMigrations,
-            Exception innerException
+            Exception innerException = null
             ) : base(
+            migrationName,
             $"Error applying migration {migrationName}",
             innerException)
         {
