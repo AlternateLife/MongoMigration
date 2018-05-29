@@ -48,6 +48,23 @@ namespace AlternateMongoMigration
             _databases = new Dictionary<string, IMongoDatabase>();
         }
 
+        public void AddDatabase(string connectionString, string databaseName)
+        {
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new ArgumentNullException(nameof(connectionString));
+            }
+
+            if (string.IsNullOrEmpty(databaseName))
+            {
+                throw new ArgumentNullException(nameof(databaseName));
+            }
+
+            var client = new MongoClient(connectionString);
+
+            _databases[databaseName] = client.GetDatabase(databaseName);
+        }
+
         public void AddDatabase(IMongoDatabase database, string databaseName)
         {
             if (database == null)

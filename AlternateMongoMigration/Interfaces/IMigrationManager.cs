@@ -24,6 +24,14 @@ namespace AlternateMongoMigration.Interfaces
         int Batch { get; }
 
         /// <summary>
+        /// Add a database to the manager by it's connection string and reference it by it's name.
+        /// </summary>
+        /// <param name="connectionString">MongoDB connection string to connect to the database</param>
+        /// <param name="databaseName">Name of the database</param>
+        /// <exception cref="ArgumentNullException">Thrown if connectionString is or databaseName is null or empty</exception>
+        void AddDatabase(string connectionString, string databaseName);
+
+        /// <summary>
         /// Add a database to the manager and reference it by it's name.
         /// </summary>
         /// <param name="database">MongoDB database</param>
