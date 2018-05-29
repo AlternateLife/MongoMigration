@@ -28,7 +28,7 @@ namespace AlternateMongoMigration
         /// <param name="database">Name of the database</param>
         /// <returns>MongoDB database instance or null if no database found</returns>
         /// <exception cref="ArgumentNullException">Thrown if database is null or empty</exception>
-        protected IMongoDatabase GetDatabase(string database)
+        public IMongoDatabase GetDatabase(string database)
         {
             return _migrationManager.GetDatabase(database);
         }
