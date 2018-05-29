@@ -1,9 +1,13 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace AlternateMongoMigration.DatabaseModels
 {
     public class MigrationModel
     {
+        [BsonId]
+        public ObjectId Id { get; set; }
+
         [BsonElement("migration")]
         public string Migration { get; set; }
 

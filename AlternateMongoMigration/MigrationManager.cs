@@ -130,6 +130,7 @@ namespace AlternateMongoMigration
                 }
 
                 // add migration entry
+                // TODO: Wrap in try-catch and throw custom exception if migration entry failed to insert
                 GetMigrationCollection().InsertOne(new MigrationModel(migration.Name, Batch));
 
                 appliedMigrations.Add(migration);
