@@ -1,6 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>0.1.0</Version>
+    <Authors>Alternate-Life</Authors>
+    <Company />
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <FileVersion>0.1.0.0</FileVersion>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>MongoDB migration library by Alternate-Life</Description>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>MongoDB Migration</PackageTags>
+    <RepositoryUrl>https://github.com/AlternateLife/AlternateMongoMigration</RepositoryUrl>
+    <PackageLicenseUrl>MIT</PackageLicenseUrl>
+    <Copyright>Alternate-Life</Copyright>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MongoDB.Bson" Version="2.6.1" />
