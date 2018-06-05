@@ -10,18 +10,19 @@ namespace AlternateMongoMigration
         /// <inheritdoc cref="IMigration"/>
         public string Name => GetType().Name;
 
-        private readonly MigrationManager _migrationManager;
-
-        protected MigrationBase(MigrationManager migrationManager)
-        {
-            _migrationManager = migrationManager;
-        }
+        private IMigrationManager _migrationManager;
 
         /// <inheritdoc cref="IMigration"/>
         public abstract void Up();
 
         /// <inheritdoc cref="IMigration"/>
         public abstract void Down();
+
+        /// <inheritdoc cref="IMigration"/>
+        public virtual void Setup(IMigrationManager migrationManager)
+        {
+            _migrationManager = migrationManager;
+        }
 
         /// <summary>
         /// Get a mongodb database by the name.

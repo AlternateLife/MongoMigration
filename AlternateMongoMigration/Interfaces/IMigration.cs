@@ -16,5 +16,11 @@
         /// Revert database migration.
         /// </summary>
         void Down();
+
+        /// <summary>
+        /// Setup the migration.
+        /// </summary>
+        /// <param name="migrationManager">Migration manager the migration is used in</param>
+        void Setup(IMigrationManager migrationManager);
     }
 }
