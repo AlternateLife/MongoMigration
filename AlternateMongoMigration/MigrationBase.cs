@@ -1,5 +1,6 @@
 ﻿using System;
 using AlternateMongoMigration.Interfaces;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace AlternateMongoMigration
@@ -31,6 +32,24 @@ namespace AlternateMongoMigration
         public IMongoDatabase GetDatabase(string database)
         {
             return _migrationManager.GetDatabase(database);
+        }
+
+        /// <summary>
+        /// Create a new collection in the database if this collection is not already existing.
+        ///
+        /// If the collection already exists, nothing will be changed.
+        /// </summary>
+        /// <param name="database">Database to create the collection in</param>
+        /// <param name="collectionName">Name of the collection</param>
+        protected void CreateCollectionIfNotExisting(IMongoDatabase database, string collectionName)
+        {
+            var collections = database.ListCollections(new ListCollectionsOptions() { Filter = new BsonDocument("name", collectionName) });
+            if (collections.Any())
+            {
+                return;
+            }
+
+            database.CreateCollection(collectionName);
         }
     }
 }
