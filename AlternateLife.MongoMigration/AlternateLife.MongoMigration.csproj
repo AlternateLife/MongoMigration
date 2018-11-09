@@ -10,8 +10,8 @@
     <Description>MongoDB migration library by Alternate-Life</Description>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>MongoDB Migration</PackageTags>
-    <RepositoryUrl>https://github.com/AlternateLife/AlternateMongoMigration</RepositoryUrl>
-    <PackageLicenseUrl>MIT</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/AlternateLife/MongoMigration</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/AlternateLife/MongoMigration/blob/master/LICENSE</PackageLicenseUrl>
     <Copyright>Alternate-Life</Copyright>
     <AssemblyName>AlternateLife.MongoMigration</AssemblyName>
     <RootNamespace>AlternateLife.MongoMigration</RootNamespace>
