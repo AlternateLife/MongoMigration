@@ -13,6 +13,8 @@
     <RepositoryUrl>https://github.com/AlternateLife/AlternateMongoMigration</RepositoryUrl>
     <PackageLicenseUrl>MIT</PackageLicenseUrl>
     <Copyright>Alternate-Life</Copyright>
+    <AssemblyName>AlternateLife.MongoMigration</AssemblyName>
+    <RootNamespace>AlternateLife.MongoMigration</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MongoDB.Bson" Version="2.6.1" />
