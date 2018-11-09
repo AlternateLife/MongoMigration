@@ -11,6 +11,6 @@
     <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AlternateMongoMigration\AlternateMongoMigration.csproj" />
+    <ProjectReference Include="..\AlternateLife.MongoMigration\AlternateLife.MongoMigration.csproj" />
   </ItemGroup>
 </Project>
