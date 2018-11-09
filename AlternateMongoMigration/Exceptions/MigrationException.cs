@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AlternateMongoMigration.Exceptions
+namespace AlternateLife.MongoMigration.Exceptions
 {
     public class MigrationException : Exception
     {

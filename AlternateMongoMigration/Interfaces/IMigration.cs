@@ -1,4 +1,4 @@
-﻿namespace AlternateMongoMigration.Interfaces
+﻿namespace AlternateLife.MongoMigration.Interfaces
 {
     public interface IMigration
     {

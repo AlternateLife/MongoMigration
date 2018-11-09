@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using AlternateMongoMigration.DatabaseModels;
-using AlternateMongoMigration.Exceptions;
-using AlternateMongoMigration.Interfaces;
+using AlternateLife.MongoMigration.DatabaseModels;
+using AlternateLife.MongoMigration.Exceptions;
+using AlternateLife.MongoMigration.Interfaces;
 using MongoDB.Driver;
 
-namespace AlternateMongoMigration
+namespace AlternateLife.MongoMigration
 {
     public class MigrationManager : IMigrationManager
     {

@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace AlternateMongoMigration.Tests
+namespace AlternateLife.MongoMigration.Tests
 {
     [TestFixture]
     public class MigrationFixture

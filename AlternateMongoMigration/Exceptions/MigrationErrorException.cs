@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using AlternateMongoMigration.Interfaces;
+using AlternateLife.MongoMigration.Interfaces;
 
-namespace AlternateMongoMigration.Exceptions
+namespace AlternateLife.MongoMigration.Exceptions
 {
     public class MigrationErrorException : MigrationException
     {

@@ -1,4 +1,4 @@
-﻿namespace AlternateMongoMigration.Tests.SampleMigrations
+﻿namespace AlternateLife.MongoMigration.Tests.SampleMigrations
 {
     public class Migration_001 : MigrationBase
     {

@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace AlternateMongoMigration.DatabaseModels
+namespace AlternateLife.MongoMigration.DatabaseModels
 {
     public class MigrationModel
     {

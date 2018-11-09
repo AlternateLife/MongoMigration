@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using AlternateMongoMigration.DatabaseModels;
-using AlternateMongoMigration.Interfaces;
-using AlternateMongoMigration.Tests.SampleMigrations;
+using AlternateLife.MongoMigration.Tests.SampleMigrations;
+using AlternateLife.MongoMigration.DatabaseModels;
+using AlternateLife.MongoMigration.Interfaces;
 using MongoDB.Driver;
 using Moq;
 using NUnit.Framework;
 
-namespace AlternateMongoMigration.Tests
+namespace AlternateLife.MongoMigration.Tests
 {
     [TestFixture]
     public class MigrationManagerFixture

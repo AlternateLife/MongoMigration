@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using AlternateMongoMigration.Exceptions;
+using AlternateLife.MongoMigration.Exceptions;
 using MongoDB.Driver;
 
-namespace AlternateMongoMigration.Interfaces
+namespace AlternateLife.MongoMigration.Interfaces
 {
     public interface IMigrationManager
     {

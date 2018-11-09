@@ -1,9 +1,9 @@
 ﻿using System;
-using AlternateMongoMigration.Interfaces;
+using AlternateLife.MongoMigration.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace AlternateMongoMigration
+namespace AlternateLife.MongoMigration
 {
     public abstract class MigrationBase : IMigration
     {
