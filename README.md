@@ -1,4 +1,4 @@
-# Alternate-Life Mongo Migration
+Mongo Migration
 
 ## Description
 
