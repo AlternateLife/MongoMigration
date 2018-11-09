@@ -1,8 +1,8 @@
-# AlternateMongoMigration
+# Alternate-Life Mongo Migration
 
 ## Description
 
-C# MongoDB automated incremental migration framework. Package is hosted on [NuGet](https://www.nuget.org/packages/AlternateMongoMigration).
+C# MongoDB automated incremental migration framework. Package is hosted on [NuGet](https://www.nuget.org/packages/AlternateLife.MongoMigration).
 
 ## Features
 
