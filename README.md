@@ -1,6 +1,7 @@
 # Mongo Migration
 
 ![Build status](https://teamcity.alternate-life.de/app/rest/builds/buildType:(id:AlternateMongoMigration_Build)/statusIcon)
+[![NuGet](https://img.shields.io/nuget/dt/AlternateLife.MongoMigration.svg)](https://www.nuget.org/packages/AlternateLife.MongoMigration)
 
 ## Description
 
